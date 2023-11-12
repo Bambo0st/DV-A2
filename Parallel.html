@@ -1,0 +1,156 @@
+<head>
+	<script src='https://cdn.plot.ly/plotly-2.27.0.min.js'></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js'></script>
+	<title>Parallel Coordinates plots</title>
+</head>
+
+<body>
+  <p>Credit to <a href="https://github.com/owid/covid-19-data/tree/master/public/data">Our World in Data</a> for    COVID data and <a href="https://plotly.com/javascript/">Plotly</a> for plotting tools.</p>
+  <p>Click and drag along axes to create filters.<br>Right click on a filter to delete it.<br>Click and drag the axis labels to reorder.<br>The first column represent the month corresponding to the polyline.</p>
+  
+  <h1 align="center">Total Cases per million</h2>
+  <p>This plot shows the total number of cases, per million of population, recorded in a country at the beginning of each month in 2021. As expected, the number increases with time in every coutry.</p>
+  <div id='casespm'></div>
+  <h1 align="center">Stringency Index</h2>
+  <p>The plot shows the value of stringency index at the start of every month in 2021. Stringency index is a "composite measure based on 9 response indicators including school closures, workplace closures, and travel bans, rescaled to a value from 0 to 100". Note that the axes are scaled from 20-85 to improve readability.</p>
+  <div id='stringency'></div>
+  <h1 align="center">Monthly Vaccinations per hundred</h2>
+  <p>The plot shows the total number of vaccinations administered every month in 2021.</p>
+  <div id='vaxxspt'></div>
+  <script>
+	var trace1 = {
+	  type: 'parcoords',
+	  line: {
+		color: [12,11,10,9,8,7,6,5,4,3,2,1],
+		colourscale: [[12,'#fde9cf'], [1, '#d4fbe2']]
+	  },
+	  
+	  dimensions: [{
+		// constraintrange: [1, 1.8],
+		range:[1, 12],
+		label: 'MONTH(2021)',
+		values: [12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
+		tickvals: [12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
+		ticktext: ['December', 'November', 'October', 'September', 'August', 'July', 'June', 'May', 'April', 'March', 'February', 'January']
+	  }, {
+		range: [0, 150000],
+		label: 'India',
+		values: [7258.611,7590.893,7841.132,8623.975,13523.379,19881.159,21459.364,22337.302,23152.32,23826.805,24193.102,24412.526].reverse()
+	  }, {    
+		range: [0, 150000],
+		label: 'United States',
+		values: [142416.81,135016.271,127393.767,115087.022,102823.367,98500.692,97351.131,94577.228,89179.325,83946.913,76862.654,58569.309],
+	  }, {
+		range: [0, 150000],
+		label: 'France',
+		values: [111462.576,104819.169,102327.579,98715.26,90301.39,84960.851,83429.021,76090.668,63290.355,52845.372,45354.125,36181.033],
+	  }, {
+		range: [0, 150000],
+		label: 'Russia',
+		values: [72693.61,59111.3,52072.252,47938.458,43456.106,38269.748,35113.68,33269.628,31470.94,29421.274,26729.31,22018.265]
+	  }, {
+		range: [0, 150000],
+		label: 'Brazil',
+		values: [102570.199,101266.728,99387.849,96381.697,92331.752,85983.019,76702.667,67764.807,58789.202,48846.133,42621.456,35386.54]
+	  }, {
+		range: [0, 150000],
+		label: 'South Africa',
+		values: [49555.177,48788.22,48463.579,46376.338,40863.171,32957.823,27809.467,26400.191,25848.332,25267.905,24272.278,17657.245]
+	  }]
+	};
+
+	var data1 = [trace1]
+
+	Plotly.newPlot('casespm', data1);
+
+	var trace2 = {
+	  type: 'parcoords',
+	  line: {
+		color: [12,11,10,9,8,7,6,5,4,3,2,1],
+		colourscale: [[12,'#fde9cf'], [1, '#d4fbe2']]
+	  },
+	  
+	  dimensions: [{
+		// constraintrange: [1, 1.8],
+		range:[1, 12],
+		label: 'MONTH(2021)',
+		values: [12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
+		tickvals: [12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
+		ticktext: ['December', 'November', 'October', 'September', 'August', 'July', 'June', 'May', 'April', 'March', 'February', 'January']
+	  }, {
+		range: [20, 85],
+		label: 'India',
+		values: [66.2,61.57,63.43,57.87,73.61,81.94,81.94,74.54,69.34,62.92,53.69,58.76].reverse()
+	  }, {    
+		range: [20, 85],
+		label: 'United States',
+		values: [48.66,52.16,52.28,52.48,46.67,58.83,56.02,54.07,56.02,68.06,71.76,71.76],
+	  }, {
+		range: [20, 85],
+		label: 'France',
+		values: [40.53,41.36,42.3,44.94,36.66,44.94,54.63,75,68.52,70.37,63.89,63.89],
+	  }, {
+		range: [20, 85],
+		label: 'Russia',
+		values: [60.65,63.43,54.17,52.31,30.09,50.46,36.57,36.57,36.57,45.83,45.83,47.69]
+	  }, {
+		range: [20, 85],
+		label: 'Brazil',
+		values: [50.23,45.46,55.73,56.98,56.94,60.65,66.2,60.65,70.83,67.13,69.91,64.35]
+	  }, {
+		range: [20, 85],
+		label: 'South Africa',
+		values: [57.41,48.15,48.15,51.85,51.85,72.22,48.15,45.37,48.15,48.15,72.22,45.37]
+	  }]
+	};
+
+	var data2 = [trace2]
+
+	Plotly.newPlot('stringency', data2);
+
+	var trace3 = {
+	  type: 'parcoords',
+	  line: {
+		color: [12,11,10,9,8,7,6,5,4,3,2,1],
+		colourscale: [[12,'#fde9cf'], [1, '#d4fbe2']]
+	  },
+	  
+	  dimensions: [{
+		// constraintrange: [1, 1.8],
+		range:[1, 12],
+		label: 'MONTH(2021)',
+		values: [12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
+		tickvals: [12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
+		ticktext: ['December', 'November', 'October', 'September', 'August', 'July', 'June', 'May', 'April', 'March', 'February', 'January']
+	  }, {
+		range: [0, 30],
+		label: 'India',
+		values: [14.71,12.55,12.31,16.35,13.36,9.7,8.58,4.2,5.99,3.8,0.77,0.28]
+	  }, {    
+		range: [0, 30],
+		label: 'United States',
+		values: [13.42,13,8.93,6.98,7.53,4.89,7.49,15.12,26.51,26.12,15.32,10.13],
+	  }, {
+		range: [0, 30],
+		label: 'France',
+		values: [25.2,10.53,5.98,9.99,21.01,27.94,26.21,22.7,15.67,10.73,4.61,2.66],
+	  }, {
+		range: [0, 30],
+		label: 'Russia',
+		values: [13.25,15.74,9.75,6.52,13.13,14.75,7.99,6.48,5.73,8.05,0,0]
+	  }, {
+		range: [0, 30],
+		label: 'Brazil',
+		values: [9.54,14.31,18,20.91,24.88,18.6,15.36,10.13,11.05,6.98,3.05,1.06]
+	  }, {
+		range: [0, 30],
+		label: 'South Africa',
+		values: [3.64,7.203333333,7.203333333,7.203333333,8.83,7.34,3.4,1.34,0.08,0.33,0.12,0]
+	  }]
+	};
+
+	var data3 = [trace3]
+
+	Plotly.newPlot('vaxxspt', data3);
+  </script>
+</body>
